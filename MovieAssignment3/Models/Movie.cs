@@ -6,6 +6,10 @@ namespace MovieAssignment3.Models
 {
     public class Movie
     {
+        [Key]
+        [Required]
+        public int MovieId { get; set; }
+
         [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; }
 
