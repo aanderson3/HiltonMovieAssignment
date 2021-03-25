@@ -8,7 +8,9 @@ namespace MovieAssignment3.Models
     {
         public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
         {
-            public DbSet<Movie> movies { get; set; }
+
         }
+
+        public DbSet<Movie> movies { get; set; }
     }
 }
