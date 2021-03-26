@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MovieAssignment3.Models;
 
@@ -13,9 +14,13 @@ namespace MovieAssignment3.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //context property
+        private MovieDbContext context { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, MovieDbContext contxt)
         {
             _logger = logger;
+            context = contxt;
         }
 
         public IActionResult Index()
@@ -37,13 +42,20 @@ namespace MovieAssignment3.Controllers
         [HttpPost]
         public IActionResult AddMovie(Movie oMovie)
         {
-            TempStorage.NewMovie(oMovie);
-            return View("Confirmation", oMovie);
+            if (ModelState.IsValid)
+            {
+                context.Movies.Add(oMovie);
+                context.SaveChanges();
+
+                return View("MovieList", context.Movies);
+            }
+
+            return View();
         }
 
         public IActionResult MovieList()
         {
-            return View(TempStorage.Movies);
+            return View(context.Movies);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
