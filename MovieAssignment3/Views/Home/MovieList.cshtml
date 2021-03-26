@@ -39,6 +39,16 @@
                         <td>@x.Edited</td>
                         <td>@x.LentTo</td>
                         <td>@x.Notes</td>
+                        <td>
+                            <form method="get" asp-action="EditMovie">
+                                <input type="hidden" name="MovieId" id="MovieId" value="@x.MovieId"/>
+                                <button class="btn-sm" type="submit">Edit Movie Info</button>
+                            </form>
+                            <form method="post" asp-action="DeleteMovie">
+                                <input type="hidden" name="MovieId" id="MovieId" value="@x.MovieId" />
+                                <button class="btn-sm" type="submit">Delete Movie</button>
+                            </form>
+                        </td>
                     </tr>
                  }
              }

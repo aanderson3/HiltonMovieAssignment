@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model MovieAssignment3.Models.Movie
+<p>Edit the movie</p>
+
+<div>
+    <form asp-action="EditMovie" method="post">
+        <input type="hidden" asp-for="MovieId" value="@ViewBag.Movie.MovieId"/>
+        <label asp-for="Category">Category:</label>
+        <input asp-for="Category" value="@ViewBag.Movie.Category"/>
+        <br />
+        <label asp-for="Title">Title:</label>
+        <input asp-for="Title" value="@ViewBag.Movie.Title"/>
+        <br />
+        <label asp-for="Year">Year:</label>
+        <input asp-for="Year" value="@ViewBag.Movie.Title"/>
+        <br />
+        <label asp-for="Director">Director:</label>
+        <input asp-for="Director" value="@ViewBag.Movie.Director"/>
+        <br />
+        <label asp-for="Rating">Rating:</label>
+        <select asp-for="Rating" value="@ViewBag.Movie.Rating">
+            <option value=""></option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+        <br />
+        <label asp-for="Edited"></label>
+        <select asp-for="Edited" value="@ViewBag.Movie.Edited">
+            <option value=""></option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <br />
+        <label asp-for="LentTo">Lent To:</label>
+        <input asp-for="LentTo" value="@ViewBag.Movie.LentTo"/>
+        <br />
+        <label asp-for="Notes">Notes</label>
+        <input asp-for="Notes" value="@ViewBag.Movie.Notes"/>
+        <br />
+        <button type="submit">Submit</button>
+        <br />
+        <div asp-validation-summary="All"></div>
+    </form>
+</div>

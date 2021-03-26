@@ -58,6 +58,46 @@ namespace MovieAssignment3.Controllers
             return View(context.Movies);
         }
 
+        [HttpGet]
+        public IActionResult EditMovie(int movieId)
+        {
+            Movie editMovie = context.Movies.Where(x => x.MovieId == movieId).FirstOrDefault();
+            ViewBag.Movie = editMovie;
+            return View(editMovie);
+        }
+
+        [HttpPost]
+        public IActionResult EditMovie(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Movie editMovie = context.Movies.Where(x => x.MovieId == movie.MovieId).FirstOrDefault();
+                editMovie.Title = movie.Title;
+                editMovie.Category = movie.Category;
+                editMovie.Year = movie.Year;
+                editMovie.Director = movie.Director;
+                editMovie.Rating = movie.Rating;
+                editMovie.Edited = movie.Edited;
+                editMovie.LentTo = movie.LentTo;
+                editMovie.Notes = movie.Notes;
+
+                //context.Movies.Update(editMovie);
+                context.SaveChanges();
+            }
+
+            return View("MovieList", context.Movies);
+        }
+
+        public IActionResult DeleteMovie(int movieId)
+        {
+            Movie editMovie = context.Movies.Where(x => x.MovieId == movieId).FirstOrDefault();
+            context.Movies.Remove(editMovie);
+            context.SaveChanges();
+
+            return View("MovieList", context.Movies);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
